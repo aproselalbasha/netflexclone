@@ -6,13 +6,14 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "./utlils/firebase";
-import { useNavigate } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { adduser } from "./utlils/userslice";
+import { photourl } from "./utlils/constant";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const [issignin, setissignin] = useState(true);
   const [message, setmessage] = useState(null);
   const username = useRef(null);
@@ -50,8 +51,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: usernamevalue,
-            photoURL:
-              "https://yt3.googleusercontent.com/ytc/AIf8zZSh4O0H7hSHJUxv2QDJU_gECyzbTX9_AifI9SukJg=s900-c-k-c0x00ffffff-no-rj",
+            photoURL: photourl,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -86,8 +86,6 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed in
-          const user = userCredential.user;
-
           // ...
         })
         .catch((error) => {

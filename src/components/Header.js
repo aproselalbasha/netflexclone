@@ -4,6 +4,7 @@ import { auth } from "./utlils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { adduser, removeuser } from "./utlils/userslice";
+import { LOGO } from "./utlils/constant";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Header = () => {
       });
   };
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName, photoURL } = user;
         dispatch(
@@ -35,15 +36,13 @@ const Header = () => {
         navigate("/");
       }
     });
+    //it unsubscribe when component is unmount
+    return () => unsubscribe();
   }, []);
   return (
     <div className="w-full absolute px-14 py-2 bg-gradient-to-b from-black z-10">
       <div className=" flex justify-between">
-        <img
-          className="w-48 "
-          src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-          alt="logo"
-        />
+        <img className="w-48 " src={LOGO} alt="logo" />
         {user && (
           <div>
             <img
@@ -51,7 +50,7 @@ const Header = () => {
               className="h-10 mt-6"
               alt="User profile"
             />
-            <p>
+            <div>
               {user.displayName}{" "}
               <nav
                 className=" bg-red-400 cursor-pointer"
@@ -60,7 +59,7 @@ const Header = () => {
                 {" "}
                 (SIGNOUT)
               </nav>
-            </p>
+            </div>
           </div>
         )}
       </div>
