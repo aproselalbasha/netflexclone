@@ -14,7 +14,7 @@ const useUpcomming = () => {
       API_options
     );
     const jsondata = await data.json();
-    console.log(jsondata.results);
+
     dispatch(addupcomming(jsondata?.results));
   };
   useEffect(() => {

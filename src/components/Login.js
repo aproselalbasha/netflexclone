@@ -9,7 +9,7 @@ import { auth } from "./utlils/firebase";
 
 import { useDispatch } from "react-redux";
 import { adduser } from "./utlils/userslice";
-import { photourl } from "./utlils/constant";
+import { BG_URL, photourl } from "./utlils/constant";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -68,7 +68,6 @@ const Login = () => {
               setmessage(error);
             });
 
-          console.log(user);
           // ...
         })
         .catch((error) => {
@@ -117,10 +116,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute ">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/2f5a878d-bbce-451b-836a-398227a34fbf/web/IN-en-20241230-TRIFECTA-perspective_5ab944a5-1a71-4f6d-b341-8699d0491edd_small.jpg"
-          alt="backgoundimg"
-        />
+        <img src={BG_URL} alt="backgoundimg" />
       </div>
       <div className="bg-black text-white py-8  p-12 absolute w-3/12 my-36 mx-auto left-0 right-0 bg-opacity-80">
         <form className=" rounded-lg mx-4" onSubmit={(e) => e.preventDefault()}>

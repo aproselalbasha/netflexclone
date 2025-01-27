@@ -6,7 +6,7 @@ const Secoundcopntainer = () => {
   const movies = useSelector((store) => store.movies);
   return (
     <div className="bg-black ">
-      <div className="-mt-80  relative z-99 ">
+      <div className="-mt-72 relative z-99 ">
         <Movielist title={"now playing"} movies={movies.nowplaying} />
         <Movielist title={"POPULAR"} movies={movies.popluarmovies} />
       </div>

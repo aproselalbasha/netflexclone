@@ -5,8 +5,6 @@ import Browse from "./Browse";
 import { useDispatch } from "react-redux";
 
 const Body = () => {
-  const dispatch = useDispatch();
-
   const approuter = createBrowserRouter([
     {
       path: "/",

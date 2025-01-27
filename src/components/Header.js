@@ -4,11 +4,12 @@ import { auth } from "./utlils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { adduser, removeuser } from "./utlils/userslice";
-import { LOGO } from "./utlils/constant";
+import { LOGO, SUPPORTED_LANGUAGE } from "./utlils/constant";
+import { togglegptsearchview } from "./utlils/gptsearchSlice";
 
 const Header = () => {
+  const showgptsearch = useSelector((store) => store.gpt.showgptsearch);
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const handlesignout = () => {
@@ -44,21 +45,33 @@ const Header = () => {
       <div className=" flex justify-between">
         <img className="w-48 " src={LOGO} alt="logo" />
         {user && (
-          <div>
-            <img
-              src={user?.photoURL}
-              className="h-10 mt-6"
-              alt="User profile"
-            />
+          <div className="relative bottom-8">
             <div>
-              {user.displayName}{" "}
-              <nav
-                className=" bg-red-400 cursor-pointer"
-                onClick={handlesignout}
+              <button
+                className="bg-red-700 relative top-14 right-32 text-white px-2 rounded-lg"
+                onClick={() => {
+                  dispatch(togglegptsearchview());
+                }}
               >
-                {" "}
-                (SIGNOUT)
-              </nav>
+                {showgptsearch ? "HOME PAGE" : "GPT SEARCH"}
+              </button>
+            </div>
+            <div className="">
+              <div className="pr-14   ">
+                <img
+                  src={user?.photoURL}
+                  className="h-10 mt-6"
+                  alt="User profile"
+                />
+                <p className="text-white ">{user.displayName}</p>
+              </div>
+
+              <button
+                onClick={handlesignout}
+                className="bg-red-500 relative bottom-14 left-12 rounded-md text-white"
+              >
+                SIGNOUT
+              </button>
             </div>
           </div>
         )}
