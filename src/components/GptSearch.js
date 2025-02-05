@@ -6,11 +6,17 @@ import { BG_URL } from "./utlils/constant";
 const GptSearch = () => {
   return (
     <div>
-      <div className="absolute -z-10 ">
-        <img src={BG_URL} alt="backgoundimg" />
+      <div className="fixed -z-10 ">
+        <img
+          className="h-screen object-cover w-screen"
+          src={BG_URL}
+          alt="backgoundimg"
+        />
       </div>
-      <Gptsearchbar />
-      <Gptmoviesuggest />
+      <div className=" md:p-0">
+        <Gptsearchbar />
+        <Gptmoviesuggest />
+      </div>
     </div>
   );
 };

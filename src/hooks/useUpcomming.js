@@ -4,9 +4,10 @@ import {
 } from "../components/utlils/movieslice";
 import { useEffect } from "react";
 import { API_options } from "../components/utlils/constant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const useUpcomming = () => {
+  const upcomming = useSelector((store) => store.movies.upcomming);
   const dispatch = useDispatch();
   const getupcomming = async () => {
     const data = await fetch(
@@ -18,7 +19,7 @@ const useUpcomming = () => {
     dispatch(addupcomming(jsondata?.results));
   };
   useEffect(() => {
-    getupcomming();
+    !upcomming && getupcomming();
   }, []);
 };
 export default useUpcomming;
